@@ -1,0 +1,23 @@
+[build]
+  functions = "netlify/functions"
+  publish   = "."
+
+# Redirige /create-preference → Netlify Function (transparente para el frontend)
+[[redirects]]
+  from   = "/create-preference"
+  to     = "/.netlify/functions/create-preference"
+  status = 200
+
+# Redirige /webhook → Netlify Function
+[[redirects]]
+  from   = "/webhook"
+  to     = "/.netlify/functions/webhook"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  command     = "node server.js"
+  port        = 3000
+  targetPort  = 3000

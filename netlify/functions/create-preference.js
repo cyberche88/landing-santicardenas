@@ -1,0 +1,94 @@
+/**
+ * Netlify Function — Crear preferencia de pago MercadoPago
+ * Equivale al endpoint POST /create-preference de server.js
+ * Se invoca en producción via: /.netlify/functions/create-preference
+ * (netlify.toml redirige /create-preference → aquí)
+ */
+
+const { MercadoPagoConfig, Preference } = require('mercadopago');
+
+const CORS_HEADERS = {
+    'Access-Control-Allow-Origin':  '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
+};
+
+exports.handler = async (event) => {
+    // Preflight CORS
+    if (event.httpMethod === 'OPTIONS') {
+        return { statusCode: 200, headers: CORS_HEADERS, body: '' };
+    }
+
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+    }
+
+    const accessToken = process.env.MP_ACCESS_TOKEN;
+    if (!accessToken) {
+        console.error('[MP] MP_ACCESS_TOKEN no configurado');
+        return { statusCode: 500, headers: CORS_HEADERS, body: JSON.stringify({ error: 'Servidor mal configurado' }) };
+    }
+
+    try {
+        const { name = '', email = '', phone = '', country = 'CO' } = JSON.parse(event.body || '{}');
+
+        // URL del sitio — Netlify la inyecta automáticamente en producción
+        const siteUrl = process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://tu-sitio.netlify.app';
+
+        const client = new MercadoPagoConfig({ accessToken, options: { timeout: 8000 } });
+        const preference = new Preference(client);
+
+        const result = await preference.create({
+            body: {
+                items: [{
+                    id:          'BOLETA-EL-FUTURO-ES-AHORA',
+                    title:       'El Futuro Es Ahora — Boleta General',
+                    description: '2 días · 11 y 12 de Abril · Bogotá',
+                    category_id: 'tickets',
+                    quantity:    1,
+                    unit_price:  270000,
+                    currency_id: 'COP'
+                }],
+
+                payer: {
+                    name:  name  || undefined,
+                    email: email || undefined,
+                    phone: phone
+                        ? { area_code: country === 'CO' ? '57' : '', number: phone.replace(/\D/g, '').slice(-10) }
+                        : undefined,
+                },
+
+                back_urls: {
+                    success: `${siteUrl}/?status=approved`,
+                    failure: `${siteUrl}/?status=rejected`,
+                    pending: `${siteUrl}/?status=in_process`
+                },
+                auto_return: 'approved',
+
+                payment_methods: { installments: 1 },
+                statement_descriptor: 'BE IMPARABLES',
+                external_reference:   `EVENTO-${Date.now()}`,
+                notification_url:     `${siteUrl}/.netlify/functions/webhook`,
+            }
+        });
+
+        return {
+            statusCode: 200,
+            headers: CORS_HEADERS,
+            body: JSON.stringify({
+                id:                 result.id,
+                init_point:         result.init_point,
+                sandbox_init_point: result.sandbox_init_point
+            })
+        };
+
+    } catch (err) {
+        console.error('[MP] Error creando preferencia:', err?.message || err);
+        return {
+            statusCode: 500,
+            headers: CORS_HEADERS,
+            body: JSON.stringify({ error: 'No se pudo crear la preferencia de pago' })
+        };
+    }
+};
