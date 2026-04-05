@@ -36,6 +36,8 @@ exports.handler = async (event) => {
         // URL del sitio — Netlify la inyecta automáticamente en producción
         const siteUrl = process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://tu-sitio.netlify.app';
 
+        console.log(`[MP] Creando preferencia — Comprador: ${name} <${email}> — siteUrl: ${siteUrl}`);
+
         const client = new MercadoPagoConfig({ accessToken, options: { timeout: 8000 } });
         const preference = new Preference(client);
 
