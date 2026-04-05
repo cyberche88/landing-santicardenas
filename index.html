@@ -363,6 +363,17 @@
             padding: 0 clamp(1.5rem, 5vw, 4rem);
         }
 
+        .hero-logo-wrap {
+            margin-bottom: 1.75rem;
+        }
+        .hero-logo {
+            width: clamp(180px, 32vw, 340px);
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 0 28px rgba(255,59,48,0.35)) drop-shadow(0 0 60px rgba(255,59,48,0.12));
+            animation: fade-up 0.9s ease both;
+        }
+
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -1486,6 +1497,34 @@
             border-top: 1px solid var(--outline);
             padding: 3rem 0 2rem;
         }
+        .footer-logo-wrap {
+            text-align: center;
+            padding: 2.5rem 0 2rem;
+            border-bottom: 1px solid var(--outline);
+            margin-bottom: 2rem;
+        }
+        .footer-logo {
+            width: clamp(140px, 28vw, 260px);
+            height: auto;
+            display: inline-block;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 18px rgba(255,255,255,0.08));
+            transition: opacity 0.3s, filter 0.3s;
+        }
+        .footer-logo:hover {
+            opacity: 1;
+            filter: drop-shadow(0 0 24px rgba(255,59,48,0.25));
+        }
+        .footer-logo-sub {
+            font-family: var(--font-head);
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            margin-top: 0.85rem;
+        }
+
         .footer-inner {
             max-width: 1200px;
             margin: 0 auto;
@@ -1493,9 +1532,9 @@
         }
         .footer-top {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
             flex-wrap: wrap;
             padding-bottom: 2rem;
             margin-bottom: 2rem;
@@ -2129,6 +2168,11 @@
     <div class="grid-overlay"></div>
 
     <div class="hero-content">
+        <!-- Logo del evento -->
+        <div class="hero-logo-wrap">
+            <img src="logo_futuro.png" alt="El Futuro Es Ahora — Be Latam Convention" class="hero-logo">
+        </div>
+
         <!-- Alert badge -->
         <div class="hero-badge">
             <span>⚠&nbsp;&nbsp;ADVERTENCIA</span>
@@ -2724,11 +2768,14 @@
      ════════════════════════════════════ -->
 <footer>
     <div class="footer-inner">
+
+        <!-- Logo central del footer -->
+        <div class="footer-logo-wrap">
+            <img src="logo_imparables.png" alt="Be Imparables" class="footer-logo">
+            <div class="footer-logo-sub">El Futuro Es Ahora · 11 y 12 de Abril · Bogotá</div>
+        </div>
+
         <div class="footer-top">
-            <div>
-                <div class="footer-brand">BE <em>IMPARABLES</em></div>
-                <div class="footer-sub">El Futuro Es Ahora · 11 de Abril · Bogotá</div>
-            </div>
             <nav class="footer-nav">
                 <a href="#hero">Inicio</a>
                 <a href="#event-details">El Evento</a>
@@ -2744,7 +2791,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="footer-copy">© 2025 Be Imparables. Todos los derechos reservados.</div>
+            <div class="footer-copy">© 2026 Be Imparables. Todos los derechos reservados.</div>
             <div class="footer-copy">Bogotá, Colombia</div>
         </div>
     </div>
