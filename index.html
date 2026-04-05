@@ -756,52 +756,192 @@
            ============================================ */
         #speakers { background: var(--surface); }
 
-        .speakers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        /* ── Featured speakers (horizontal cards) ── */
+        .speakers-featured {
+            display: flex;
+            flex-direction: column;
             gap: 1px;
             background: var(--outline);
             margin-top: 3rem;
         }
-        .speaker-card {
+        .sp-card-h {
             background: var(--surface-card);
+            display: grid;
+            grid-template-columns: 260px 1fr;
             position: relative;
             overflow: hidden;
+            transition: background 0.3s;
         }
-        .speaker-card::after {
+        .sp-card-h:hover { background: var(--surface-mid); }
+        .sp-card-h::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 3px;
+            background: var(--red);
+        }
+        .sp-card-h:nth-child(even)::before { background: var(--gold); }
+
+        .sp-img-wrap {
+            position: relative;
+            overflow: hidden;
+            min-height: 240px;
+            background: linear-gradient(160deg, var(--surface-mid), var(--surface-low));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sp-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+        .sp-img-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 70%, var(--surface-card));
+            pointer-events: none;
+        }
+        .sp-card-h:hover .sp-img-wrap::after {
+            background: linear-gradient(to right, transparent 70%, var(--surface-mid));
+        }
+        .sp-img-initial {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: var(--text-muted);
+            position: absolute;
+        }
+
+        .sp-body {
+            padding: 2rem 2rem 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .sp-tag {
+            display: inline-block;
+            font-family: var(--font-head);
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.28em;
+            color: var(--red);
+            margin-bottom: 0.5rem;
+        }
+        .sp-card-h:nth-child(even) .sp-tag { color: var(--gold); }
+        .sp-name-h {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+        }
+        .sp-role-h {
+            font-family: var(--font-head);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .sp-bio {
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            font-weight: 400;
+            color: var(--text-dim);
+            line-height: 1.65;
+            max-width: 580px;
+        }
+
+        /* ── Also on stage grid ── */
+        .sp-also-title {
+            font-family: var(--font-head);
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-muted);
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .sp-also-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--outline);
+        }
+        .speakers-also {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--outline);
+        }
+        .sp-card-sm {
+            background: var(--surface-card);
+            padding: 1.5rem;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .sp-card-sm:hover { background: var(--surface-mid); }
+        .sp-card-sm::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 2px;
             background: var(--red);
             transform: scaleX(0);
+            transform-origin: left;
             transition: transform 0.35s ease;
         }
-        .speaker-card:hover::after { transform: scaleX(1); }
-
-        .sp-placeholder {
-            width: 100%;
-            aspect-ratio: 3/4;
-            background: linear-gradient(160deg, var(--surface-mid), var(--surface-low));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .sp-card-sm:hover::before { transform: scaleX(1); }
+        .sp-sm-flag {
+            font-family: var(--font-head);
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 0.35rem;
+        }
+        .sp-sm-name {
             font-family: var(--font-display);
-            font-size: 5rem;
-            color: var(--text-muted);
-            position: relative;
+            font-size: 1.5rem;
+            color: var(--text);
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 0.25rem;
         }
-        .sp-placeholder::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 50%, rgba(20,20,20,0.9));
+        .sp-sm-role {
+            font-family: var(--font-head);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .sp-sm-bio {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.6;
         }
 
-        .sp-info {
-            padding: 1.1rem 1.5rem;
-            border-top: 1px solid var(--outline);
+        /* Responsive speakers */
+        @media (max-width: 680px) {
+            .sp-card-h { grid-template-columns: 1fr; }
+            .sp-img-wrap { min-height: 220px; }
+            .sp-img-wrap::after { background: linear-gradient(to bottom, transparent 70%, var(--surface-card)); }
+            .sp-body { padding: 1.25rem; }
         }
+
         .sp-name {
             font-family: var(--font-head);
             font-size: 1.05rem;
@@ -2085,36 +2225,83 @@
             EN 2 DÍAS
         </h2>
 
-        <div class="speakers-grid">
-            <div class="speaker-card reveal">
-                <div class="sp-placeholder">A</div>
-                <div class="sp-info">
-                    <div class="sp-name">Alejandro M.</div>
-                    <div class="sp-role">Trader Profesional · +$5M operados</div>
+        <!-- Ponentes principales -->
+        <div class="speakers-featured">
+
+            <!-- MOYN & EHSAAN ISLAM -->
+            <div class="sp-card-h reveal">
+                <div class="sp-img-wrap">
+                    <img src="speakers/moyn-ehsaan.jpg" alt="Moyn y Ehsaan Islam"
+                         onerror="this.style.display='none'">
+                    <span class="sp-img-initial">MI</span>
+                </div>
+                <div class="sp-body">
+                    <span class="sp-tag">Co-Fundadores de Be</span>
+                    <div class="sp-name-h">Moyn &amp; Ehsaan Islam</div>
+                    <div class="sp-role-h">Visionarios del Network Marketing Global</div>
+                    <p class="sp-bio">Los hermanos Islam son los arquitectos de uno de los movimientos de afiliados más grandes del mundo. Moyn Islam, CEO y Co-Fundador de Be, ha construido una red de miles de afiliados independientes en múltiples continentes. En IMPARABLES, compartirán la visión que mueve millones y el futuro de la tecnología SageMaster como motor de riqueza.</p>
                 </div>
             </div>
-            <div class="speaker-card reveal">
-                <div class="sp-placeholder">C</div>
-                <div class="sp-info">
-                    <div class="sp-name">Camilo Cortés</div>
-                    <div class="sp-role">CEO Be Imparables · Fundador</div>
+
+            <!-- NICK SANTONASTASSO -->
+            <div class="sp-card-h reveal">
+                <div class="sp-img-wrap">
+                    <img src="speakers/nick-santonastasso.jpg" alt="Nick Santonastasso"
+                         onerror="this.style.display='none'">
+                    <span class="sp-img-initial">NS</span>
+                </div>
+                <div class="sp-body">
+                    <span class="sp-tag">Conferencista Mundial</span>
+                    <div class="sp-name-h">Nick Santonastasso</div>
+                    <div class="sp-role-h">Autor · Coach de Alto Rendimiento</div>
+                    <p class="sp-bio">Nació con el síndrome de Hanhart — sin piernas y con un solo brazo parcial. Lo que para el mundo era una limitación, Nick lo convirtió en su mayor fortaleza. Ha compartido escenario con Tony Robbins y Gary Vaynerchuk, e inspirado a millones a dejar las excusas y asumir plena responsabilidad por sus vidas. En IMPARABLES, vendrá a remover tus límites desde adentro.</p>
                 </div>
             </div>
-            <div class="speaker-card reveal">
-                <div class="sp-placeholder">V</div>
-                <div class="sp-info">
-                    <div class="sp-name">Valentina R.</div>
-                    <div class="sp-role">IA & Finanzas · Especialista</div>
+
+            <!-- MANUEL ZABALETA & ALEXANDRA CORTES -->
+            <div class="sp-card-h reveal">
+                <div class="sp-img-wrap">
+                    <img src="speakers/manuel-alexandra.jpg" alt="Manuel Zabaleta y Alexandra Cortes"
+                         onerror="this.style.display='none'">
+                    <span class="sp-img-initial">MA</span>
+                </div>
+                <div class="sp-body">
+                    <span class="sp-tag">Colombia · Referentes Negocios Digitales</span>
+                    <div class="sp-name-h">Manuel Zabaleta<br>&amp; Alexandra Cortes</div>
+                    <div class="sp-role-h">Ingenieros · Empresarios · Educadores Financieros</div>
+                    <p class="sp-bio">Una pareja de ingenieros con más de 6 años en la industria del crecimiento personal y los negocios en red. Lograron pagar más de $50,000 USD en deudas después de una quiebra financiera en 2019, en menos de dos años. Han impactado la vida de miles de familias en Colombia en finanzas, liderazgo y libertad de tiempo.</p>
                 </div>
             </div>
-            <div class="speaker-card reveal">
-                <div class="sp-placeholder">R</div>
-                <div class="sp-info">
-                    <div class="sp-name">Ricardo S.</div>
-                    <div class="sp-role">Inversionista Angel · Mentor</div>
-                </div>
-            </div>
+
         </div>
+
+        <!-- También en escenario -->
+        <div class="sp-also-title">También en escenario</div>
+        <div class="speakers-also">
+
+            <div class="sp-card-sm reveal">
+                <div class="sp-sm-flag">Italia</div>
+                <div class="sp-sm-name">Giorgio Trabaldo</div>
+                <div class="sp-sm-role">Líder Multinivel Internacional</div>
+                <div class="sp-sm-bio">Uno de los networkers más exitosos de Europa. Giorgio ha construido organizaciones de decenas de miles de personas y es reconocido por sus estrategias de duplicación a escala global.</div>
+            </div>
+
+            <div class="sp-card-sm reveal">
+                <div class="sp-sm-flag">Latinoamérica</div>
+                <div class="sp-sm-name">Charlie Villarreal</div>
+                <div class="sp-sm-role">Emprendedor Digital · Liderazgo y Mentalidad</div>
+                <div class="sp-sm-bio">Referente en mentalidad emprendedora y network marketing en Latinoamérica. Charlie inspira con su historia y equipa con estrategias que realmente funcionan en el mercado hispano.</div>
+            </div>
+
+            <div class="sp-card-sm reveal">
+                <div class="sp-sm-flag">Colombia</div>
+                <div class="sp-sm-name">Eduardo Otero</div>
+                <div class="sp-sm-role">Estratega de Negocios · Educación Financiera</div>
+                <div class="sp-sm-bio">Eduardo combina décadas de experiencia en negocios con una pasión profunda por enseñar a las personas a construir riqueza. Su sesión de educación financiera es una de las más esperadas del evento.</div>
+            </div>
+
+        </div>
+
     </div>
 </section>
 
