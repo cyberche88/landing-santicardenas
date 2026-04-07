@@ -47,7 +47,7 @@ exports.handler = async (event) => {
             body: {
                 items: [{
                     id:          'BOLETA-EL-FUTURO-ES-AHORA',
-                    title:       'El Futuro Es Ahora — Boleta General',
+                    title:       'El Futuro Es Ahora — Boleta SC',
                     description: '2 días · 11 y 12 de Abril · Bogotá',
                     category_id: 'tickets',
                     quantity:    1,
