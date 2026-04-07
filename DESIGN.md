@@ -9,7 +9,17 @@ To break the "template" look, we move away from safe, centered layouts. Instead,
 ---
 
 ## 2. Colors & Surface Philosophy
-The palette is a high-contrast battleground. We use deep blacks to represent stability and "Fire Red" to signal immediate action or systemic threat. "Aged Gold" is used sparingly to denote premium status and exclusive insights.
+The palette is a high-contrast battleground. We use deep grays to represent stability and "Burnt Orange" to signal immediate action or systemic threat. "Aged Gold" is used sparingly to denote premium status and exclusive insights.
+
+### Color Tokens
+- **Primary action / alert:** Burnt Orange `#FF6B00`
+- **Dark orange:** `#CC5200`
+- **Deep orange:** `#7A3500`
+- **Surface base:** Dark Gray `#1e1e1e`
+- **Surface low:** `#181818`
+- **Surface card:** `#262626`
+- **Surface mid:** `#2e2e2e`
+- **Surface bright:** `#3a3a3a`
 
 ### The "No-Line" Rule
 Standard 1px solid borders are strictly prohibited for sectioning. They feel "web-standard" and cheap. Boundaries must be defined through:
@@ -19,9 +29,9 @@ Standard 1px solid borders are strictly prohibited for sectioning. They feel "we
 
 ### Surface Hierarchy & Nesting
 Treat the UI as a series of recessed or extruded physical layers.
-- **The Base:** All core layouts start at `surface` (#131313).
-- **The Depth:** Use `surface-container-lowest` (#0e0e0e) for backgrounds of high-data density areas to make them feel "sunken" into the screen.
-- **The Callout:** Use `surface-bright` (#393939) only for transient elements like hover states or active terminal lines.
+- **The Base:** All core layouts start at `surface` (#1e1e1e).
+- **The Depth:** Use `surface-low` (#181818) for backgrounds of high-data density areas to make them feel "sunken" into the screen.
+- **The Callout:** Use `surface-bright` (#3a3a3a) only for transient elements like hover states or active terminal lines.
 
 ### Signature Textures & "Glass & Gradient"
 To provide "soul" to the darkness, use subtle linear gradients on primary CTAs, transitioning from `primary` (#ffb4aa) to `primary-container` (#ff5545). For floating HUD elements, utilize **Glassmorphism**: semi-transparent `surface-container-highest` with a 20px backdrop-blur to create an "advanced optics" feel.
@@ -49,7 +59,7 @@ We reject the "Material" drop shadow. In this system, depth is a product of ligh
 ## 5. Components
 
 ### Buttons (The "Trigger" Component)
-* **Primary:** Solid `primary` (#ffb4aa) background, `on-primary` (#690003) text. Hard 0px corners. Use a glitch-hover effect where the button slightly offsets or shifts color on interaction.
+* **Primary:** Solid `primary` (#FF6B00) background, `on-primary` (#fff) text. Hard 0px corners. Use a glitch-hover effect where the button slightly offsets or shifts color on interaction.
 * **Secondary:** `surface-container-highest` background with an `Aged Gold` (`secondary`) left-side accent bar (2px).
 * **Tertiary:** All-caps text using `label-md` with a subtle `primary` underline that expands on hover.
 

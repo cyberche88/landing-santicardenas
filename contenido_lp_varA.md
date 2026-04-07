@@ -4,7 +4,7 @@ Enfoque psicológico: Aversión a la pérdida. La gente actúa más rápido para
 Diseña una landing page dark premium de alta conversión para un evento masivo de educación financiera e inteligencia artificial. El tono es urgente, directo y provocador. Debe sentirse como una advertencia: el mundo está cambiando y te estás quedando atrás.
 IDENTIDAD VISUAL
 
-Fondo negro dominante con acentos en rojo fuego (#FF3B30) y dorado (#D4AF37)
+Fondo gris oscuro dominante con acentos en naranja quemado (#FF6B00) y dorado (#D4AF37)
 Tipografía: Títulos en mayúscula, bold, impactantes (estilo Bebas Neue o Impact)
 Elementos visuales: Líneas de gráficos financieros en movimiento, glitches sutiles, efecto de "alarma" o "alerta" en ciertas secciones. Relojes, countdowns prominentes.
 Sensación general: "Se te acaba el tiempo"
