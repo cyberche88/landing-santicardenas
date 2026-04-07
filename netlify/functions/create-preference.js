@@ -73,8 +73,7 @@ exports.handler = async (event) => {
                 // Sin restricciones de método de pago — dejar que MP muestre todo
                 statement_descriptor: 'BE IMPARABLES',
                 external_reference:   `EVENTO-${Date.now()}`,
-                // Usar siempre la URL .netlify.app para el webhook (más estable que dominio custom)
-                notification_url: `https://landing-camilocortes.netlify.app/.netlify/functions/webhook`,
+                notification_url: `${siteUrl}/.netlify/functions/webhook`,
             }
         });
 
