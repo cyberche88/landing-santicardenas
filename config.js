@@ -11,7 +11,7 @@
    de compra y no se carga el tracking).
 ========================================================= */
 window.SITE_CONFIG = {
-  WHATSAPP_GENERAL: '',
+  WHATSAPP_GENERAL: 'https://wa.link/353jf0',
   WHATSAPP_ASESOR:  '',
   META_PIXEL_ID:    '',
   GA4_ID:           '',
