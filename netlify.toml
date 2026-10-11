@@ -2,6 +2,9 @@
   functions = "netlify/functions"
   publish   = "."
 
+[functions]
+  node_bundler = "esbuild"
+
 # Redirige /create-preference → Netlify Function (transparente para el frontend)
 [[redirects]]
   from   = "/create-preference"
@@ -14,10 +17,71 @@
   to     = "/.netlify/functions/webhook"
   status = 200
 
-[functions]
-  node_bundler = "esbuild"
+# Archivos internos que no deben servirse
+[[redirects]]
+  from   = "/server.js"
+  to     = "/404"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/crear-usuario-prueba.js"
+  to     = "/404"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/package.json"
+  to     = "/404"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/package-lock.json"
+  to     = "/404"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/lib/*"
+  to     = "/404"
+  status = 404
+  force  = true
+
+[[redirects]]
+  from   = "/docs/*"
+  to     = "/404"
+  status = 404
+  force  = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    X-Frame-Options        = "SAMEORIGIN"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/config.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/media/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/speakers/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
 
 [dev]
-  command     = "node server.js"
-  port        = 3000
-  targetPort  = 3000
+  command    = "node server.js"
+  port       = 8888
+  targetPort = 3000

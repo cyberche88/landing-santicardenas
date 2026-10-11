@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /gracias
+Disallow: /.netlify/
+
+Sitemap: https://soysanticardenas.com/sitemap.xml

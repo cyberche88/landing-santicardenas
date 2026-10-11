@@ -45,7 +45,7 @@ exports.handler = async (event) => {
     let body = {};
     try { body = JSON.parse(event.body || '{}'); } catch (_) {}
 
-    const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
+    const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN || process.env.MERCADOPAGO_ACCESS_TOKEN });
 
     // ── Formato nuevo: type/data (IPN v2) ───────────────────────
     if (body.type === 'payment' && body.data?.id) {
@@ -56,7 +56,7 @@ exports.handler = async (event) => {
         try {
             // Consultar la merchant_order para obtener los payment_ids
             const res = await fetch(body.resource, {
-                headers: { 'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}` }
+                headers: { 'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN || process.env.MERCADOPAGO_ACCESS_TOKEN}` }
             });
             const order = await res.json();
             console.log(`[Webhook] merchant_order ${order.id} — status: ${order.order_status}`);
