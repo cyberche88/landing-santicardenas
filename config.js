@@ -13,7 +13,7 @@
 window.SITE_CONFIG = {
   WHATSAPP_GENERAL: 'https://wa.link/353jf0',
   WHATSAPP_ASESOR:  '',
-  META_PIXEL_ID:    '',
+  META_PIXEL_ID:    '2932505073768693',
   GA4_ID:           '',
   PRICE_COP:        299000
 };
