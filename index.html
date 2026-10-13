@@ -2368,6 +2368,25 @@ footer strong{
    CHECKOUT — MODAL MERCADOPAGO
 ========================================================= */
 [hidden]{display:none!important}
+
+/* =========================================================
+   VIDEO PROMO (YouTube, carga al hacer clic)
+========================================================= */
+.video-promo{background:linear-gradient(180deg,#040406,#06030b);padding-top:40px}
+.video-head{max-width:820px;margin:0 auto 34px;text-align:center}
+.video-head .section-title{font-size:clamp(30px,4.2vw,50px);line-height:1}
+.video-head .section-title span{display:block;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.video-frame{position:relative;max-width:900px;margin:0 auto;aspect-ratio:16/9;overflow:hidden;background:#0c0c11;border:1px solid rgba(145,73,255,.42);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(115,40,255,.12)}
+.video-frame::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--gradient);z-index:3}
+.video-frame iframe,.video-lite{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-lite{padding:0;background:#000;display:block}
+.video-lite img{width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s,transform .6s}
+.video-lite:hover img{opacity:1;transform:scale(1.02)}
+.video-lite-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;display:grid;place-items:center;padding-left:6px;font-size:30px;color:#fff;background:linear-gradient(135deg,#7b2cff,#ff2b8a);border:1px solid rgba(255,255,255,.5);box-shadow:0 0 40px rgba(156,46,255,.55);transition:transform .2s}
+.video-lite:hover .video-lite-play{transform:translate(-50%,-50%) scale(1.08)}
+.video-lite:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+.video-lite-note{position:absolute;right:14px;bottom:12px;padding:6px 10px;background:rgba(5,5,7,.75);border:1px solid rgba(255,255,255,.15);color:#e7e7ed;font-family:"Barlow Condensed",sans-serif;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:480px){.video-promo{padding-top:20px}.video-head .section-title{font-size:27px}.video-lite-play{width:64px;height:64px;font-size:22px}.video-lite-note{right:8px;bottom:8px;font-size:10px;padding:4px 7px}}
 .ticket-secure{margin-top:14px;color:#777783;font-size:11px}
 .pay-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(3,3,6,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .pay-dialog{position:relative;width:min(100%,460px);max-height:calc(100vh - 40px);overflow:auto;padding:34px 28px 26px;background:linear-gradient(145deg,#14141b,#08080c);border:1px solid rgba(145,73,255,.35);box-shadow:0 35px 90px rgba(0,0,0,.7),0 0 60px rgba(115,40,255,.10)}
@@ -2512,6 +2531,38 @@ footer strong{
 
 </section>
 
+
+<!-- ========================================================
+     VIDEO
+======================================================== -->
+
+<section class="section video-promo" id="video">
+  <div class="container">
+
+    <div class="video-head reveal">
+      <div class="eyebrow">DALE PLAY ANTES DE DECIDIR</div>
+      <h2 class="section-title">
+        ¿Y SI HAY UN CÓDIGO PARA QUE UN&nbsp;DÍA
+        <span>TRABAJAR SEA OPCIONAL PARA TI?</span>
+      </h2>
+    </div>
+
+    <div class="video-frame reveal">
+      <!-- El video tiene música con reclamo de derechos (LatinAutor - UMPG) que bloquea
+           la reproducción incrustada, por eso se abre en YouTube. -->
+      <a class="video-lite" id="videoLite" href="https://www.youtube.com/watch?v=IiSnuzGsmk0" target="_blank" rel="noopener noreferrer" aria-label="Ver video en YouTube: ¿Y si hay un código para que un día trabajar sea opcional para ti?">
+        <img src="https://i.ytimg.com/vi/IiSnuzGsmk0/maxresdefault.jpg" alt="" loading="lazy" width="1280" height="720">
+        <span class="video-lite-play" aria-hidden="true">▶</span>
+        <span class="video-lite-note">Ver en YouTube ↗</span>
+      </a>
+    </div>
+
+    <div class="center reveal" style="margin-top:30px;">
+      <a href="#entradas" class="btn btn-primary">QUIERO ASEGURAR MI CUPO</a>
+    </div>
+
+  </div>
+</section>
 
 
 
@@ -3965,6 +4016,19 @@ window.addEventListener(
 </div>
 
 <script>
+/* =========================================================
+   VIDEO — tracking del clic (se abre en YouTube)
+========================================================= */
+(function(){
+  var link = document.getElementById('videoLite');
+  if(!link) return;
+  var img = link.querySelector('img');
+  img.addEventListener('error', function(){ img.src = 'https://i.ytimg.com/vi/IiSnuzGsmk0/hqdefault.jpg'; }, { once: true });
+  link.addEventListener('click', function(){
+    window.trackEvent && trackEvent('ViewContent', 'video_play', { content_name: 'Video promo Código del Futuro' });
+  });
+})();
+
 /* =========================================================
    WHATSAPP — links desde config.js
 ========================================================= */
